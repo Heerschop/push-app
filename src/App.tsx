@@ -81,7 +81,10 @@ function clearLog() {
 function App() {
   const [log, setLog] = useState('');
   const [token, setToken] = useState('');
-  const [name, setName] = useState(navigator?.userAgentData?.platform);
+  const [name, setName] = useState(
+    navigator.userAgentData?.platform ?? (navigator.userAgent.match(/\(.*?(\w+).*?\)/) ?? [])[1] ?? 'no-name',
+  );
+
   const getId = (token: string = '') => {
     let id = 0;
 
@@ -130,7 +133,7 @@ function App() {
         </button>
       </div>
       <div className="text">
-        <textarea value={log}></textarea>
+        <textarea readOnly value={log}></textarea>
       </div>
       <div className="icons">
         <IconButton type="send" onClick={() => sendLogs(getId(token))} />
