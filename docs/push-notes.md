@@ -24,3 +24,25 @@ self.registration.showNotification('test title', {
   badge: '/icon-192.png',
 });
 ```
+```bash
+DATA='
+{
+  "to": "1122334455",
+  "data": {
+    "title": "New grade",
+    "body": "A new grade has been registered in SIS.",
+    "link":"https://student-dev.ic.uva.nl/en/study-results?gradeId=178091-99999GG3Y"
+  },
+  "priority": 10
+}
+'
+
+
+curl --request POST                                         \
+    --header 'Authorization: key='$SERVER_KEY               \
+    --Header 'Content-Type: application/json'               \
+    --data   ${DATA/DATE/$(date -u +"%Y-%m-%dT%H:%M:%SZ")}  \
+    https://uva-push-app-default-rtdb.europe-west1.firebasedatabase.app/1684831513418/test2.json
+
+
+```
