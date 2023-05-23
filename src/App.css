@@ -40,6 +40,10 @@
   height: 5rem;
 }
 
+.device-name {
+  font-size: 1.5rem;
+}
+
 textarea {
   color: var(--prim-text);
   width: 100%;
@@ -58,7 +62,7 @@ textarea {
   }
 }
 
-@media screen and (max-height: 880px) {
+@media screen and (max-height: 700px) {
   #root {
     padding-top: 1%;
     padding-bottom: 1%;

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { version } from '../package.json';
 import { initializeApp } from 'firebase/app';
-import { getMessaging, onMessage, getToken } from 'firebase/messaging';
+import { getMessaging, onMessage, getToken, isSupported } from 'firebase/messaging';
 import { IconButton } from './primitives/icon-button';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -79,13 +79,13 @@ function clearLog() {
 }
 
 function App() {
+  const initialized = useRef(false);
   const [log, setLog] = useState('');
   const [token, setToken] = useState('');
-  const [name, setName] = useState(
-    navigator.userAgentData?.platform ?? (navigator.userAgent.match(/\(.*?(\w+).*?\)/) ?? [])[1] ?? 'no-name',
-  );
 
-  const getId = (token: string = '') => {
+  const getDeviceName = (token: string = '') => {
+    const deviceName =
+      navigator.userAgentData?.platform || (navigator.userAgent.match(/\(.*?(\w+).*?\)/) || [])[1] || 'no-name';
     let id = 0;
 
     for (let index = 0; index < token.length; index++) {
@@ -94,26 +94,39 @@ function App() {
 
     id = id % 100000000;
 
-    return id.toString().padStart(8, '0') + '-' + name.toLowerCase();
-  };
-
-  storageEvent = event => {
-    setLog(event.newValue ?? '');
+    return id.toString().padStart(8, '0') + '-' + deviceName.toLowerCase();
   };
 
   useEffect(() => {
+    if (initialized.current) return;
+
+    initialized.current = true;
+
     onMessage(messaging, payload => {
       console.log('Message received. ', payload);
       // ...
     });
-    console.log('useEffect');
+
+    isSupported().then(async supported => {
+      if (supported && Notification.permission === 'granted' && !token) {
+        const token = await getToken(messaging);
+
+        setToken(token);
+
+        console.log('token:', token);
+      }
+    });
+
+    storageEvent = event => {
+      setLog(event.newValue ?? '');
+    };
   }, []);
 
   return (
     <>
       <h1>Push Test</h1>
       <h2>{version}</h2>
-      <h2>{name}</h2>
+      <span className="device-name">{getDeviceName(token)}</span>
       <div className="buttons">
         <button
           onClick={async () => {
@@ -126,7 +139,7 @@ function App() {
 
             setToken(token);
 
-            sendToken(getId(token), token);
+            sendToken(getDeviceName(token), token);
           }}
         >
           Get Token
@@ -136,11 +149,25 @@ function App() {
         <textarea readOnly value={log}></textarea>
       </div>
       <div className="icons">
-        <IconButton type="send" onClick={() => sendLogs(getId(token))} />
+        <IconButton type="send" onClick={() => sendLogs(getDeviceName(token))} />
         <IconButton type="trash" onClick={() => clearLog()} />
       </div>
     </>
   );
+}
+
+function Test() {
+  const dataFetch = useRef(false);
+
+  console.error('Test');
+
+  useEffect(() => {
+    if (dataFetch.current) return;
+    dataFetch.current = true;
+    console.error('useEffect');
+  });
+
+  return <div>test</div>;
 }
 
 export default App;
