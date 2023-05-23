@@ -2,10 +2,19 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { version } from '../package.json';
 import { initializeApp } from 'firebase/app';
-import { getMessaging, onMessage, getToken, isSupported } from 'firebase/messaging';
+import { getMessaging, onMessage, getToken, isSupported, Messaging } from 'firebase/messaging';
 import { IconButton } from './primitives/icon-button';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyC0bWApWZ1N6_6PCp2Wh3HSTIrINkBXzC8',
+  authDomain: 'uva-push-app.firebaseapp.com',
+  projectId: 'uva-push-app',
+  storageBucket: 'uva-push-app.appspot.com',
+  messagingSenderId: '318562901003',
+  appId: '1:318562901003:web:baa3384f539b055ec17b0e',
+};
 
 declare global {
   interface Navigator {
@@ -18,23 +27,9 @@ declare global {
 }
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: 'AIzaSyC0bWApWZ1N6_6PCp2Wh3HSTIrINkBXzC8',
-  authDomain: 'uva-push-app.firebaseapp.com',
-  projectId: 'uva-push-app',
-  storageBucket: 'uva-push-app.appspot.com',
-  messagingSenderId: '318562901003',
-  appId: '1:318562901003:web:baa3384f539b055ec17b0e',
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
 
 console.log(navigator?.userAgent);
 console.log();
-
-console.log('initialize-app:', app);
 
 let storageEvent = (event: StorageEvent) => {};
 
@@ -78,48 +73,63 @@ function clearLog() {
   window.dispatchEvent(new StorageEvent('storage', event));
 }
 
+function getDeviceName(token: string = '') {
+  const deviceName =
+    navigator.userAgentData?.platform || (navigator.userAgent.match(/\(.*?(\w+).*?\)/) || [])[1] || 'no-name';
+  let id = 0;
+
+  for (let index = 0; index < token.length; index++) {
+    id += token.charCodeAt(index) * index;
+  }
+
+  id = id % 100000000;
+
+  return id.toString().padStart(8, '0') + '-' + deviceName.toLowerCase();
+}
+
 function App() {
   const initialized = useRef(false);
   const [log, setLog] = useState('');
   const [token, setToken] = useState('');
-
-  const getDeviceName = (token: string = '') => {
-    const deviceName =
-      navigator.userAgentData?.platform || (navigator.userAgent.match(/\(.*?(\w+).*?\)/) || [])[1] || 'no-name';
-    let id = 0;
-
-    for (let index = 0; index < token.length; index++) {
-      id += token.charCodeAt(index) * index;
-    }
-
-    id = id % 100000000;
-
-    return id.toString().padStart(8, '0') + '-' + deviceName.toLowerCase();
-  };
+  const [messaging, setMessaging] = useState<Messaging | undefined>(undefined);
 
   useEffect(() => {
     if (initialized.current) return;
 
     initialized.current = true;
 
-    onMessage(messaging, payload => {
-      console.log('Message received. ', payload);
-      // ...
-    });
-
-    isSupported().then(async supported => {
-      if (supported && Notification.permission === 'granted' && !token) {
-        const token = await getToken(messaging);
-
-        setToken(token);
-
-        console.log('token:', token);
-      }
-    });
-
     storageEvent = event => {
       setLog(event.newValue ?? '');
     };
+
+    isSupported().then(async supported => {
+      if (!supported) {
+        console.log('Push not supported!');
+        return;
+      }
+
+      try {
+        const app = initializeApp(firebaseConfig);
+        const messaging = getMessaging(app);
+
+        setMessaging(messaging);
+
+        onMessage(messaging, payload => {
+          console.log('Message received. ', payload);
+        });
+
+        if (Notification.permission === 'granted') {
+          const token = await getToken(messaging);
+
+          setToken(token);
+
+          console.log('token:', token);
+        }
+        console.log('initialize-app:', app);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }, []);
 
   return (
@@ -129,17 +139,24 @@ function App() {
       <span className="device-name">{getDeviceName(token)}</span>
       <div className="buttons">
         <button
+          disabled={messaging === undefined || Notification === undefined}
           onClick={async () => {
-            const permission = await Notification.requestPermission();
+            try {
+              const permission = await Notification.requestPermission();
 
-            console.log('permission:', permission);
+              console.log('permission:', permission);
 
-            const token = await getToken(messaging);
-            console.log('token:', token);
+              if (messaging) {
+                const token = await getToken(messaging);
+                console.log('token:', token);
 
-            setToken(token);
+                setToken(token);
 
-            sendToken(getDeviceName(token), token);
+                sendToken(getDeviceName(token), token);
+              }
+            } catch (error) {
+              console.log(error);
+            }
           }}
         >
           Get Token
@@ -154,20 +171,6 @@ function App() {
       </div>
     </>
   );
-}
-
-function Test() {
-  const dataFetch = useRef(false);
-
-  console.error('Test');
-
-  useEffect(() => {
-    if (dataFetch.current) return;
-    dataFetch.current = true;
-    console.error('useEffect');
-  });
-
-  return <div>test</div>;
 }
 
 export default App;
