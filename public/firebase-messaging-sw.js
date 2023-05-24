@@ -1,4 +1,4 @@
-const version = '1.0.40';
+const version = '1.0.46';
 const channel = new BroadcastChannel('service-worker');
 
 CONSOLE = { log: console.log };
@@ -56,7 +56,16 @@ self.addEventListener('push', event => {
       body: version,
       icon: '/icon-192.png',
       badge: '/icon-192.png',
-      data: data?.data,
+      data: data?.data.link,
     }),
   );
+});
+
+self.addEventListener('notificationclick', event => {
+  console.log('Service worker  :', version);
+  console.log('Click link      :', event.notification.data);
+
+  event.notification.close();
+
+  event.waitUntil(self.clients.openWindow(event.notification.data.link));
 });

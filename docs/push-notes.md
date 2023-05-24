@@ -2,7 +2,7 @@ https://firebase.google.com/docs/cloud-messaging/
 https://dev.to/onesignal/how-to-integrate-onesignal-into-a-next-js-app-1dmg
 https://medium.com/@sarafathulla/how-to-add-firebase-push-notifications-in-next-js-react-8eecc56b5cab
 https://blog.logrocket.com/push-notifications-react-firebase/
-
+https://developer.apple.com/documentation/usernotifications/sending_web_push_notifications_in_web_apps_safari_and_other_browsers
 
 
 ```javascript

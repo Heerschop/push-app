@@ -135,6 +135,11 @@ function App() {
     console.log(navigator?.userAgent);
     console.log();
 
+    if (window.location.search) {
+      console.log('Query arguments :', window.location.search);
+      console.log();
+    }
+
     isSupported().then(supported => {
       if (!supported) {
         console.log('Push not supported!');
