@@ -159,17 +159,25 @@ function App() {
         <button disabled={!supported || messaging !== undefined} onClick={() => initialize()}>
           Initialize
         </button>
+        <button
+          disabled={Notification === undefined || Notification.permission !== 'default'}
+          onClick={async () => {
+            console.log('Requesting      : permission');
+
+            const permission = await Notification.requestPermission();
+
+            console.log('Permission      :', permission);
+            console.log();
+          }}
+        >
+          Permission
+        </button>
 
         <button
-          disabled={messaging === undefined || Notification === undefined}
+          disabled={messaging === undefined || Notification?.permission !== 'granted'}
           onClick={async () => {
             try {
-              console.log('Requesting token...');
-              console.log();
-
-              const permission = await Notification.requestPermission();
-
-              console.log('Permission      :', permission);
+              console.log('Requesting      : token');
 
               if (messaging) {
                 const token = await getToken(messaging);
@@ -185,7 +193,7 @@ function App() {
             }
           }}
         >
-          Get Token
+          Token
         </button>
       </div>
       <div className="text">
