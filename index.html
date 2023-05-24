@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <script>
-      CONSOLE = {
-        log: console.log,
-      };
+      CONSOLE = { log: console.log };
       sessionStorage.removeItem('console.log');
 
       console.log = (message, ...args) => {
+        message = message || '';
+
         CONSOLE.log(message, ...args);
 
         const trimChar = (value, char) => {
@@ -19,7 +19,8 @@
           type: 'storage',
           storageArea: sessionStorage,
           oldValue: text,
-          newValue: text + (message ?? '') + args.flatMap(item => trimChar(JSON.stringify(item, null, 2), '"')) + '\n',
+          newValue:
+            text + [message, args.flatMap(item => trimChar(JSON.stringify(item, null, 2), '"'))].join(' ') + '\n',
         };
 
         if (event.newValue !== event.oldValue) {

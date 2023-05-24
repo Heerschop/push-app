@@ -53,6 +53,7 @@ textarea {
   border-width: 0;
   background: transparent;
   white-space: pre;
+  font-family: monospace, 'Courier New', Courier;
 }
 
 @media screen and (max-width: 880px) {

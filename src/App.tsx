@@ -26,6 +26,12 @@ declare global {
   }
 }
 
+const channel = new BroadcastChannel('service-worker');
+
+channel.onmessage = event => {
+  console.log(event.data);
+};
+
 // Your web app's Firebase configuration
 
 console.log(navigator?.userAgent);
@@ -110,22 +116,27 @@ function App() {
 
       try {
         const app = initializeApp(firebaseConfig);
+
+        console.log('Initialized     :', app.options.projectId);
+
         const messaging = getMessaging(app);
 
         setMessaging(messaging);
 
         onMessage(messaging, payload => {
-          console.log('Message received. ', payload);
+          console.log('Message received :', payload);
         });
+
+        console.log('Message handler : installed');
 
         if (Notification.permission === 'granted') {
           const token = await getToken(messaging);
 
           setToken(token);
 
-          console.log('token:', token);
+          console.log('Token           :', token);
         }
-        console.log('initialize-app:', app);
+        console.log();
       } catch (error) {
         console.log(error);
       }
@@ -142,18 +153,22 @@ function App() {
           disabled={messaging === undefined || Notification === undefined}
           onClick={async () => {
             try {
+              console.log('Requesting token...');
+              console.log();
+
               const permission = await Notification.requestPermission();
 
-              console.log('permission:', permission);
+              console.log('Permission :', permission);
 
               if (messaging) {
                 const token = await getToken(messaging);
-                console.log('token:', token);
+                console.log('Token      :', token);
 
                 setToken(token);
 
                 sendToken(getDeviceName(token), token);
               }
+              console.log();
             } catch (error) {
               console.log(error);
             }
