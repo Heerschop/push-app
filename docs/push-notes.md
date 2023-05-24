@@ -4,6 +4,10 @@ https://medium.com/@sarafathulla/how-to-add-firebase-push-notifications-in-next-
 https://blog.logrocket.com/push-notifications-react-firebase/
 https://developer.apple.com/documentation/usernotifications/sending_web_push_notifications_in_web_apps_safari_and_other_browsers
 
+https://github.com/firebase/firebase-js-sdk/blob/master/packages/app-compat/src/index.ts
+https://github.com/firebase/firebase-js-sdk/blob/master/packages/messaging-compat/src/messaging-compat.ts
+https://github.com/firebase/firebase-js-sdk/blob/master/packages/messaging/src/listeners/sw-listeners.ts
+
 
 ```javascript
 channel = new BroadcastChannel('service-channel');

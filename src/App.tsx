@@ -96,6 +96,8 @@ function App() {
   const [token, setToken] = useState('');
   const [messaging, setMessaging] = useState<Messaging | undefined>(undefined);
   const [supported, setSupported] = useState(false);
+  const [registration, setRegistration] = useState<ServiceWorkerRegistration | undefined | null>(undefined);
+
   const initialize = async () => {
     try {
       const app = initializeApp(firebaseConfig);
@@ -112,7 +114,7 @@ function App() {
       });
       console.log('Message handler : installed');
 
-      if (Notification.permission === 'granted') {
+      if (window.Notification?.permission === 'granted') {
         const token = await getToken(messaging);
 
         setToken(token);
@@ -140,6 +142,12 @@ function App() {
       console.log();
     }
 
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      const registration = registrations.find(item => item.active?.scriptURL?.includes?.('/firebase-messaging-sw.js'));
+
+      setRegistration(registration || null);
+    });
+
     isSupported().then(supported => {
       if (!supported) {
         console.log('Push not supported!');
@@ -156,17 +164,50 @@ function App() {
       <h2>{version}</h2>
       <span className="device-name">{getDeviceName(token)}</span>
       <div className="buttons">
+        <button
+          disabled={registration === undefined || registration !== null}
+          onClick={async () => {
+            try {
+              console.log('Requesting      : registration');
+
+              const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+                scope: '/firebase-cloud-messaging-push-scope',
+              });
+
+              // console.log('waiting         :', registration?.waiting);
+              // console.log('installing      :', registration?.installing);
+              // console.log('state           :', registration?.active?.state);
+              // console.log('registerd       :', registration);
+              setTimeout(() => {
+                console.log('registerd       :', registration?.active?.scriptURL);
+                console.log();
+              }, 1000);
+
+              setRegistration(registration);
+            } catch (error) {
+              console.log(error);
+              console.log();
+            }
+          }}
+        >
+          Register
+        </button>
+
         <button disabled={!supported || messaging !== undefined} onClick={() => initialize()}>
           Initialize
         </button>
         <button
-          disabled={Notification === undefined || Notification.permission !== 'default'}
+          disabled={window.Notification === undefined || window.Notification?.permission !== 'default'}
           onClick={async () => {
-            console.log('Requesting      : permission');
+            try {
+              console.log('Requesting      : permission');
 
-            const permission = await Notification.requestPermission();
+              const permission = await Notification.requestPermission();
 
-            console.log('Permission      :', permission);
+              console.log('Permission      :', permission);
+            } catch (error) {
+              console.log(error);
+            }
             console.log();
           }}
         >
@@ -174,13 +215,35 @@ function App() {
         </button>
 
         <button
-          disabled={messaging === undefined || Notification?.permission !== 'granted'}
+          disabled={registration === undefined || registration === null}
+          onClick={async () => {
+            try {
+              console.log('Requesting      : unregister');
+
+              await registration?.unregister();
+
+              setRegistration(null);
+
+              console.log('unregisterd     : oke');
+            } catch (error) {
+              console.log(error);
+            }
+            console.log();
+          }}
+        >
+          Unregister
+        </button>
+
+        <button
+          disabled={messaging === undefined || !registration || window.Notification?.permission !== 'granted'}
           onClick={async () => {
             try {
               console.log('Requesting      : token');
 
-              if (messaging) {
-                const token = await getToken(messaging);
+              if (messaging && registration) {
+                const token = await getToken(messaging, {
+                  serviceWorkerRegistration: registration,
+                });
                 console.log('Token           :', token);
 
                 setToken(token);

@@ -12,7 +12,7 @@
 
 .buttons {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   gap: 1rem;
   justify-content: center;
   margin: 2rem 0rem 2rem 0rem;
@@ -71,5 +71,5 @@ textarea {
 }
 
 .buttons button {
-width: 11.0rem;
+  width: 11rem;
 }

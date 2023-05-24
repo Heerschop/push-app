@@ -1,4 +1,4 @@
-const version = '1.0.48';
+const version = '1.0.52';
 const channel = new BroadcastChannel('service-worker');
 
 CONSOLE = { log: console.log };

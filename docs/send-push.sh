@@ -44,8 +44,8 @@ function send-push-web {
       https://fcm.googleapis.com/fcm/send
 }
 
-#send-push-web    'linux' 'dRFRFFisYNTsG2nV81zKJW:APA91bGuxpmsepPf19BxD4NcKyRa5_RTTeyCGlPdUTsBPStZ-lzxOkW4gKRozVdQLFM7hWMqJMWlOv6Bice_yF_Q8YPz6hs4Gu4_3Jj5NEQElwW3qRj1hACAqT_w0aTI6LmQPIizxARP'
-send-push-web    'iphone-oke' 'c3B0VO9HryH6aDk2W9oWvM:APA91bFHv-EkhTY5RphuM_lfU2a12g6TPN77hGYwj18fAFxYT6PIPIvTR1r0BS3onK5SFr-UvphT_-GvfrlJf4fqGbdUAFrfjxU6oFrw4yXJ-Rr0dWo1o4G2hglXnFFFkA9W1LMtBPj0'
-#send-push-web    'iphone-err' 'f2ZQkHfoNADjteSh6XSayA:APA91bEiu2joFUwRFCvO8g4b0BwjYw4ujQ_VMBlM7GPg4Ft4DBLuJIpaKEBdgi90qFRfG9az6SuiadJbk8CsOCdElRA5xxy7q8q5f-qA_NmlWRvtc6chqLCULH835EMTIkgrlDJVm1bi'
+#send-push-web    'linux' 'fggF0vgLrwU-BlZkV9KNP1:APA91bFq5yhUo3oEeWW-wQUs3g22NcbOvUw2vIgbzVIkF5oRqbH1_iMKGu5O5eUBCP_4EOWomzVMYB2jeNDUP65-HFvNH_JQXQY4IIZbIvlLPr0nGaI54nkU_t6ocyeFD_j64ii4veR_'
+#send-push-web    'iphone-oke' 'c3B0VO9HryH6aDk2W9oWvM:APA91bFHv-EkhTY5RphuM_lfU2a12g6TPN77hGYwj18fAFxYT6PIPIvTR1r0BS3onK5SFr-UvphT_-GvfrlJf4fqGbdUAFrfjxU6oFrw4yXJ-Rr0dWo1o4G2hglXnFFFkA9W1LMtBPj0'
+send-push-web    'iphone-err' 'dPD5_-WBntd1fM8G0ezalg:APA91bEt81X0G3RXkrJME61XQuNJUUZfcGHH9SiD2tt4ugSbMX3kl1WoYkid9xkfbMQnVxhTWZRuBCtpTMjg2muveNCWR06XeI6m9DvWSMVDfAPA2_7fy45RFw1wbCnuiVTc1L1sZjMI'
 
 #send-push-web    'macintosh' 'cajkhS0fK7sUQqw6EvnutX:APA91bHOSw7wDlI_6RfKphS30dYnh2LgBr2Joz8zw5dL54IcNysaebNyyFHX40tKd79mXtvUUXyxyZrSGcteeV0whM8g6FxzhEBfSPOFKK8HFSFPOTUgjcZg1EuDIYD9Nf4q0QcbBBNr'
