@@ -6,11 +6,12 @@ export type IconTypes = keyof typeof icons;
 type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
   type?: IconTypes;
+  disabled?: boolean;
 };
 
-export function IconButton({ onClick, type = 'send' }: ButtonProps) {
+export function IconButton({ onClick, disabled, type = 'send' }: ButtonProps) {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} disabled={disabled}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

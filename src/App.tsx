@@ -187,6 +187,7 @@ function App() {
         <textarea readOnly value={log}></textarea>
       </div>
       <div className="icons">
+        <IconButton type="copy" onClick={() => navigator.clipboard.writeText(token)} disabled={token === ''} />
         <IconButton type="send" onClick={() => sendLogs(getDeviceName(token))} />
         <IconButton type="trash" onClick={() => clearLog()} />
       </div>
