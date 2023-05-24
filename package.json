@@ -1,7 +1,7 @@
 {
   "name": "push-app",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "start": "vite --host",
@@ -27,7 +27,8 @@
     "firebase-tools": "^12.0.1",
     "prettier": "^2.8.8",
     "typescript": "^5.0.2",
-    "vite": "^4.3.2"
+    "vite": "^4.3.2",
+    "vite-plugin-pwa": "^0.15.0"
   },
   "prettier": {
     "printWidth": 120,

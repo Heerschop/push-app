@@ -3,8 +3,7 @@
 ### Deploy site
 
 ```bash
-npm run build
-
 npx firebase login
-npx firebase deploy
+
+npm run build && npx firebase deploy
 ```
