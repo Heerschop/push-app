@@ -125,11 +125,10 @@ function App() {
 
         setMessaging(messaging);
 
-        onMessage(messaging, payload => {
-          console.log('Message received :', payload);
-        });
-
-        console.log('Message handler : installed');
+        // onMessage(messaging, payload => {
+        //   console.log('Message received :', payload);
+        // });
+        // console.log('Message handler : installed');
 
         if (Notification.permission === 'granted') {
           const token = await getToken(messaging);

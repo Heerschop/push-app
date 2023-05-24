@@ -80,7 +80,7 @@ function send-push-web {
       https://fcm.googleapis.com/fcm/send
 }
 
-#send-push-web    'TEST' 'cu5YUh07uOrF9TxkYBhYGB:APA91bEO68xuRf4Q7j_Thmj8hXY0XkpUZXnLzZKzhVe2PfNa0CQQSzCPUMVunnjnTF-Nj6KmONmCkPK5O5ACtPMW_DLI0DiwhIOPAd9zHrFAt2exEllBwWsLrRGgv0zixTgIALfCqM6M'
-send-push-web    'TEST' 'cajkhS0fK7sUQqw6EvnutX:APA91bE0Yg9c3ckcnaJysoJcPvcMwJXnbsvXbJeBFNfmPJ55b5K6HfIZSfl2EqiHFzGGXKwX-b0S6R29cumoCykeQONDol6ZmndhBWKiZDpTu5O88MjZV-A1eTNkAMxAiXrRWmWWhAdY'
+#send-push-web    'TEST' 'cajkhS0fK7sUQqw6EvnutX:APA91bHOSw7wDlI_6RfKphS30dYnh2LgBr2Joz8zw5dL54IcNysaebNyyFHX40tKd79mXtvUUXyxyZrSGcteeV0whM8g6FxzhEBfSPOFKK8HFSFPOTUgjcZg1EuDIYD9Nf4q0QcbBBNr'
+#send-push-web    'TEST' 'dRFRFFisYNTsG2nV81zKJW:APA91bGoZEnLQT0tnMA4BXQkK0LyXJx1bT1YAe6LR9uNw2styyiuUN6mUai7nbC04Oe-VAdxE790JrMg8tRm9MSUGRvaCrjsCeLAz8m1H9lMCrcg_O6kM1LS3hlBkZ6LTo6GR9Kwzdzm'
 
-#send-push-web    'TEST' 'fwvZP2rBwgZxcVz240Aur_:APA91bEA7TG2kvhSl_mzV3n03IfZeAV_zwt9LpFpTeJ58WrvcCsTPzWL5bCao68ffLmW-GHtwMVF3oJWyjbdQ8NGTI6MEJUDgcwyj86BnLlq-l45yzh9XTzg3Bu5xuCAXYZWNSVROFNT'
+send-push-web    'TEST' 'eAZ_1kXZiHJyplcK5avjQo:APA91bFUnjWj03bSLz8kKkq5jxJZKEpsBEh6L6p15fShqtE0HlvwjHTd-m-Y1MLyag1Z4HoTNyNrHp_uoKJ9NlncpR2IQKEuI0Y0aaV5Dnw_kl8k9icj6Fz3iXRbHqYSoH88OqNMzjjL'

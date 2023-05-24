@@ -1,7 +1,7 @@
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js');
 
-const version = '1.0.14';
+const version = '1.0.20';
 
 const channel = new BroadcastChannel('service-worker');
 
@@ -37,3 +37,18 @@ firebase.initializeApp(firebaseConfig);
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
 const messaging = firebase.messaging();
+
+self.addEventListener('push', async event => {
+  console.log('Service worker  :', version);
+  console.log('Push event      :', event);
+  console.log();
+
+  event.waitUntil(
+    self.registration.showNotification('Notification title', {
+      body: 'Notification body',
+      icon: '/icon-192.png',
+      badge: '/icon-192.png',
+      data: 'Notification data',
+    }),
+  );
+});
