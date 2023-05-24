@@ -158,11 +158,11 @@ function App() {
 
               const permission = await Notification.requestPermission();
 
-              console.log('Permission :', permission);
+              console.log('Permission     :', permission);
 
               if (messaging) {
                 const token = await getToken(messaging);
-                console.log('Token      :', token);
+                console.log('Token          :', token);
 
                 setToken(token);
 

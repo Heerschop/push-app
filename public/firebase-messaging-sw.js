@@ -1,7 +1,7 @@
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js');
 
-const version = '1.0.11';
+const version = '1.0.12';
 
 const channel = new BroadcastChannel('service-worker');
 
@@ -19,7 +19,7 @@ console.log = (message, ...args) => {
   channel.postMessage([message, args.flatMap(item => trimChar(JSON.stringify(item, null, 2), '"'))].join(' '));
 };
 
-console.log('Service worker:', version);
+console.log('Service worker :', version);
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
