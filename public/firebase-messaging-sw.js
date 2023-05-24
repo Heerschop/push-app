@@ -1,7 +1,7 @@
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js');
 
-const version = '1.0.13';
+const version = '1.0.14';
 
 const channel = new BroadcastChannel('service-worker');
 

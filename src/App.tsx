@@ -118,6 +118,8 @@ function App() {
         const app = initializeApp(firebaseConfig);
 
         console.log('Initialized     :', app.options.projectId);
+        console.log('Version         :', version);
+
 
         const messaging = getMessaging(app);
 
