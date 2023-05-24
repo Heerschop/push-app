@@ -1,7 +1,4 @@
-// importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
-// importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js');
-
-const version = '1.0.28';
+const version = '1.0.40';
 const channel = new BroadcastChannel('service-worker');
 
 CONSOLE = { log: console.log };
@@ -19,7 +16,11 @@ console.log = (message, ...args) => {
 };
 
 console.log('Service worker  :', version);
+
 /*
+importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js');
+
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
@@ -35,19 +36,27 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
-// const messaging = firebase.messaging();
+const messaging = firebase.messaging();
 */
+
 self.addEventListener('push', event => {
+  let data = {};
+
+  try {
+    data = event.data.json();
+  } catch (error) {}
+
   console.log('Service worker  :', version);
+  console.log('Push data       :', data);
   console.log('Push event      :', event);
   console.log();
 
   event.waitUntil(
-    self.registration.showNotification('Notification title', {
+    self.registration.showNotification(data?.data?.title ?? 'default title', {
       body: version,
       icon: '/icon-192.png',
       badge: '/icon-192.png',
-      data: 'Notification data',
+      data: data?.data,
     }),
   );
 });
