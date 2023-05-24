@@ -69,3 +69,7 @@ textarea {
     padding-bottom: 1%;
   }
 }
+
+.buttons button {
+width: 11.0rem;
+}

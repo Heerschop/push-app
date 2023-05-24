@@ -34,9 +34,6 @@ channel.onmessage = event => {
 
 // Your web app's Firebase configuration
 
-console.log(navigator?.userAgent);
-console.log();
-
 let storageEvent = (event: StorageEvent) => {};
 
 const firebaseDB = 'https://uva-push-app-default-rtdb.europe-west1.firebasedatabase.app/1684831513418/';
@@ -98,49 +95,53 @@ function App() {
   const [log, setLog] = useState('');
   const [token, setToken] = useState('');
   const [messaging, setMessaging] = useState<Messaging | undefined>(undefined);
+  const [supported, setSupported] = useState(false);
+  const initialize = async () => {
+    try {
+      const app = initializeApp(firebaseConfig);
+
+      console.log('Initialized     :', app.options.projectId);
+      console.log('Version         :', version);
+
+      const messaging = getMessaging(app);
+
+      setMessaging(messaging);
+
+      // onMessage(messaging, payload => {
+      //   console.log('Message received :', payload);
+      // });
+      // console.log('Message handler : installed');
+
+      if (Notification.permission === 'granted') {
+        const token = await getToken(messaging);
+
+        setToken(token);
+
+        console.log('Token           :', token);
+      }
+      console.log();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (initialized.current) return;
 
     initialized.current = true;
 
-    storageEvent = event => {
-      setLog(event.newValue ?? '');
-    };
+    storageEvent = event => setLog(event.newValue ?? '');
 
-    isSupported().then(async supported => {
+    console.log(navigator?.userAgent);
+    console.log();
+
+    isSupported().then(supported => {
       if (!supported) {
         console.log('Push not supported!');
         return;
       }
 
-      try {
-        const app = initializeApp(firebaseConfig);
-
-        console.log('Initialized     :', app.options.projectId);
-        console.log('Version         :', version);
-
-
-        const messaging = getMessaging(app);
-
-        setMessaging(messaging);
-
-        // onMessage(messaging, payload => {
-        //   console.log('Message received :', payload);
-        // });
-        // console.log('Message handler : installed');
-
-        if (Notification.permission === 'granted') {
-          const token = await getToken(messaging);
-
-          setToken(token);
-
-          console.log('Token           :', token);
-        }
-        console.log();
-      } catch (error) {
-        console.log(error);
-      }
+      setSupported(true);
     });
   }, []);
 
@@ -150,6 +151,10 @@ function App() {
       <h2>{version}</h2>
       <span className="device-name">{getDeviceName(token)}</span>
       <div className="buttons">
+        <button disabled={!supported || messaging !== undefined} onClick={() => initialize()}>
+          Initialize
+        </button>
+
         <button
           disabled={messaging === undefined || Notification === undefined}
           onClick={async () => {
