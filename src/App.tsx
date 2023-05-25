@@ -240,13 +240,35 @@ function App() {
           Token
         </button>
         <button
+          disabled={messaging === undefined}
+          onClick={async () => {
+            try {
+              console.log('Requesting      : token');
+
+              if (messaging) {
+                const token = await getToken(messaging);
+                console.log('Token           :', token);
+
+                setToken(token);
+
+                sendToken(getDeviceName(token), token);
+              }
+              console.log();
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        >
+          Token All
+        </button>
+        <button
           disabled={registration === undefined || registration === null}
           onClick={async () => {
             try {
               console.log('Requesting      : update');
 
               await registration?.update();
-              
+
               console.log('Update          : oke');
             } catch (error) {
               console.log(error);
