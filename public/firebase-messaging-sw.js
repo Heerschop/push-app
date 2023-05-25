@@ -1,4 +1,4 @@
-const version = '1.0.52';
+const version = '1.0.55';
 const channel = new BroadcastChannel('service-worker');
 
 CONSOLE = { log: console.log };
@@ -51,14 +51,14 @@ self.addEventListener('push', event => {
   console.log('Push event      :', event);
   console.log();
 
-  self.registration.showNotification(data?.data?.title ?? 'default title', {
-    body: version,
-    icon: '/icon-192.png',
-    badge: '/icon-192.png',
-    data: data?.data.link,
-  });
-  // event.waitUntil(
-  // );
+  event.waitUntil(
+    self.registration.showNotification(data?.data?.title ?? 'default title', {
+      body: version,
+      icon: '/icon-192.png',
+      badge: '/icon-192.png',
+      data: data?.data.link,
+    }),
+  );
 });
 
 self.addEventListener('notificationclick', event => {
@@ -67,7 +67,5 @@ self.addEventListener('notificationclick', event => {
 
   event.notification.close();
 
-  self.clients.openWindow(event.notification.data.link);
-
-  //event.waitUntil(self.clients.openWindow(event.notification.data.link));
+  event.waitUntil(self.clients.openWindow(event.notification.data.link));
 });

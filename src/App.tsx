@@ -114,13 +114,13 @@ function App() {
       });
       console.log('Message handler : installed');
 
-      if (window.Notification?.permission === 'granted') {
-        const token = await getToken(messaging);
+      // if (window.Notification?.permission === 'granted') {
+      //   const token = await getToken(messaging);
 
-        setToken(token);
+      //   setToken(token);
 
-        console.log('Token           :', token);
-      }
+      //   console.log('Token           :', token);
+      // }
       console.log();
     } catch (error) {
       console.log(error);
@@ -165,38 +165,6 @@ function App() {
       <span className="device-name">{getDeviceName(token)}</span>
       <div className="buttons">
         <button
-          disabled={registration === undefined || registration !== null}
-          onClick={async () => {
-            try {
-              console.log('Requesting      : registration');
-
-              const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
-                scope: '/firebase-cloud-messaging-push-scope',
-              });
-
-              // console.log('waiting         :', registration?.waiting);
-              // console.log('installing      :', registration?.installing);
-              // console.log('state           :', registration?.active?.state);
-              // console.log('registerd       :', registration);
-              setTimeout(() => {
-                console.log('registerd       :', registration?.active?.scriptURL);
-                console.log();
-              }, 1000);
-
-              setRegistration(registration);
-            } catch (error) {
-              console.log(error);
-              console.log();
-            }
-          }}
-        >
-          Register
-        </button>
-
-        <button disabled={!supported || messaging !== undefined} onClick={() => initialize()}>
-          Initialize
-        </button>
-        <button
           disabled={window.Notification === undefined || window.Notification?.permission !== 'default'}
           onClick={async () => {
             try {
@@ -215,23 +183,36 @@ function App() {
         </button>
 
         <button
-          disabled={registration === undefined || registration === null}
+          disabled={registration === undefined || registration !== null}
           onClick={async () => {
             try {
-              console.log('Requesting      : unregister');
+              console.log('Requesting      : registration');
 
-              await registration?.unregister();
+              const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+                scope: '/firebase-cloud-messaging-push-scope',
+              });
 
-              setRegistration(null);
+              // console.log('waiting         :', registration?.waiting);
+              // console.log('installing      :', registration?.installing);
+              // console.log('state           :', registration?.active?.state);
+              // console.log('registerd       :', registration);
+              setTimeout(() => {
+                console.log('Registerd       :', registration?.active?.scriptURL);
+                console.log();
+              }, 1000);
 
-              console.log('unregisterd     : oke');
+              setRegistration(registration);
             } catch (error) {
               console.log(error);
+              console.log();
             }
-            console.log();
           }}
         >
-          Unregister
+          Register
+        </button>
+
+        <button disabled={!supported || messaging !== undefined} onClick={() => initialize()}>
+          Initialize
         </button>
 
         <button
@@ -257,6 +238,42 @@ function App() {
           }}
         >
           Token
+        </button>
+        <button
+          disabled={registration === undefined || registration === null}
+          onClick={async () => {
+            try {
+              console.log('Requesting      : update');
+
+              await registration?.update();
+              
+              console.log('Update          : oke');
+            } catch (error) {
+              console.log(error);
+            }
+            console.log();
+          }}
+        >
+          Update
+        </button>
+        <button
+          disabled={registration === undefined || registration === null}
+          onClick={async () => {
+            try {
+              console.log('Requesting      : unregister');
+
+              await registration?.unregister();
+
+              setRegistration(null);
+
+              console.log('Unregister      : oke');
+            } catch (error) {
+              console.log(error);
+            }
+            console.log();
+          }}
+        >
+          Unregister
         </button>
       </div>
       <div className="text">
