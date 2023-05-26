@@ -1,4 +1,4 @@
-const version = '1.0.59';
+const version = '1.0.61';
 const channel = new BroadcastChannel('service-worker');
 
 CONSOLE = { log: console.log };
@@ -16,6 +16,12 @@ console.log = (message, ...args) => {
 };
 
 console.log('Service worker  :', version);
+
+SW_COUNTER = 0;
+
+setInterval(() => {
+  console.log((SW_COUNTER++).toString().padStart(4, '0') + '            :', version);
+}, 10000);
 
 /*
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
