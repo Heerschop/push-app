@@ -1,4 +1,4 @@
-const version = '1.0.57';
+const version = '1.0.59';
 const channel = new BroadcastChannel('service-worker');
 
 CONSOLE = { log: console.log };
@@ -67,5 +67,5 @@ self.addEventListener('notificationclick', event => {
 
   event.notification.close();
 
-  event.waitUntil(self.clients.openWindow(event.notification.data.link));
+  event.waitUntil(self.clients.openWindow(event.notification.data));
 });
