@@ -7,7 +7,7 @@ https://developer.apple.com/documentation/usernotifications/sending_web_push_not
 https://github.com/firebase/firebase-js-sdk/blob/master/packages/app-compat/src/index.ts
 https://github.com/firebase/firebase-js-sdk/blob/master/packages/messaging-compat/src/messaging-compat.ts
 https://github.com/firebase/firebase-js-sdk/blob/master/packages/messaging/src/listeners/sw-listeners.ts
-
+https://developer.apple.com/forums/tags/wwdc2022-10098
 
 ```javascript
 channel = new BroadcastChannel('service-channel');
@@ -48,5 +48,15 @@ curl --request POST                                         \
     --data   ${DATA/DATE/$(date -u +"%Y-%m-%dT%H:%M:%SZ")}  \
     https://uva-push-app-default-rtdb.europe-west1.firebasedatabase.app/1684831513418/test2.json
 
+
+```
+
+
+```javascript
+navigator.serviceWorker.register('/sw.js', { scope: '/' });
+
+registrations=[];
+navigator.serviceWorker.getRegistrations().then(item=>registrations=item);
+registrations[0].unregister();
 
 ```

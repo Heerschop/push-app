@@ -44,9 +44,10 @@ function send-push-web {
       https://fcm.googleapis.com/fcm/send
 }
 
-#send-push-web    'linux' 'fggF0vgLrwU-BlZkV9KNP1:APA91bFq5yhUo3oEeWW-wQUs3g22NcbOvUw2vIgbzVIkF5oRqbH1_iMKGu5O5eUBCP_4EOWomzVMYB2jeNDUP65-HFvNH_JQXQY4IIZbIvlLPr0nGaI54nkU_t6ocyeFD_j64ii4veR_'
-#send-push-web    'iphone-oke' 'c3B0VO9HryH6aDk2W9oWvM:APA91bFHv-EkhTY5RphuM_lfU2a12g6TPN77hGYwj18fAFxYT6PIPIvTR1r0BS3onK5SFr-UvphT_-GvfrlJf4fqGbdUAFrfjxU6oFrw4yXJ-Rr0dWo1o4G2hglXnFFFkA9W1LMtBPj0'
-send-push-web    'iphone-err' 'eaiejfs02oqfvtI6tyiZM0:APA91bGy1hwjS1p_UfalCJQ3OWvc47srvcBtmgYD-wse49cWqyhepwDO4m63PoBP-sVqU-fpl-zntwMbettBFMosiCPhHL1MID4NMdZidM3dIpm3A5Ite-AhtzINhS19YphactXATGER'
+#send-push-web    'linux' 'cQmfRPL94ChnD0wUxbhRh3:APA91bHbdvmV0i5kYrMXIuCgqa7ab-KR6mFsQAI2GabuY0MVSbCc7Ew9q3nqXol0FyyjXAFIrKgaR4QnUH2gPthy_gdYyu8xtsvhW0SGV9ZYtW_fbf7pXkXWLLTtDANFiIIjmcqA06Kg'
+#send-push-web    'iphone-oke' 'cUKGRD7Jik5XTYFSMBcf-y:APA91bH81CVqbTDUoNwDxM1urwrUe1R_r7SiTx0scRyWOMyKu6uLuXVV1BaqFIayL41gh-jyWEIk1br6PVjr889JjahHfaFYzqDWGJ_C4dKkxD00hCvyG5-LNI5-P3gnwXYUUJcrXlPU'
+
+send-push-web    'iphone-err' 'ds3cEXEw59yAHlW3fpBzwn:APA91bGZZabFzHGQshaVbRAs6JvtSEhoIpvtdNaJBZijIVSTQQ3IQKb9VKc5HQY6kjoZ99upWjlxoEqN1ZJz83I7fy7uuVDX0r4i8MFZFk_o6Y4Gv5R8lPMu4u7x5ez8SqsOA31xSIYJ'
 #send-push-web    'android' 'dR-r80Qnls0puy370UTU48:APA91bG6eknFj04q0FRWvpLYCKUqOshFv0K9IDPsUkOcK-cUefyqAy2leMrSxN_cxuaDB4I-w1NKZ8PJonJSwges9gwCvZvDL1uX1udrwjLrmhSHhUCntotHoclEdlph-Fxwor0t8nGT'
 
 
