@@ -133,14 +133,14 @@ textarea {
 }
 
 @media screen and (max-width: 880px) {
-  #root {
+  .container {
     padding-left: 2%;
     padding-right: 2%;
   }
 }
 
 @media screen and (max-height: 700px) {
-  #root {
+  .container {
     padding-top: 1%;
     padding-bottom: 1%;
   }

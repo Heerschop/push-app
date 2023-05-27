@@ -1,32 +1,11 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
-import {
-  getMessaging,
-  onMessage,
-  getToken,
-  isSupported,
-} from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging.js';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-window.addEventListener('storage', event => {
-  if (event.storageArea === sessionStorage) {
-    if (element.logTextarea) element.logTextarea.value = event.newValue ?? '';
-  }
-});
-
-const channel = new BroadcastChannel('service-worker');
-
-channel.onmessage = event => {
-  console.log(event.data);
-};
-
+let initializeApp = null;
+let getToken = null;
 let messaging = null;
-let supported = window.Notification !== null;
+let supported = !!window.Notification && !!window.navigator.serviceWorker;
 let registration = null;
 let token = '';
 
-// Your web app's Firebase configuration
+const channel = new BroadcastChannel('service-worker');
 const firebaseConfig = {
   apiKey: 'AIzaSyC0bWApWZ1N6_6PCp2Wh3HSTIrINkBXzC8',
   authDomain: 'uva-push-app.firebaseapp.com',
@@ -36,9 +15,6 @@ const firebaseConfig = {
   messagingSenderId: '318562901003',
   appId: '1:318562901003:web:baa3384f539b055ec17b0e',
 };
-
-const firebaseDB = firebaseConfig.databaseURL + '/1684831513418/';
-
 const element = {
   logTextarea: document.querySelector('#log-textarea'),
   permissionButton: document.querySelector('#permission-button'),
@@ -51,16 +27,47 @@ const element = {
   deviceNameSpan: document.querySelector('#device-name'),
 };
 
+const firebaseDB = firebaseConfig.databaseURL + '/1684831513418/';
+
+window.addEventListener('storage', event => {
+  if (event.storageArea === sessionStorage) {
+    if (element.logTextarea) element.logTextarea.value = event.newValue ?? '';
+  }
+});
+
+channel.onmessage = event => {
+  console.log(event.data);
+};
+
+console.log(navigator?.userAgent);
+console.log();
+
+if (window.location.search) {
+  console.log('Query arguments :', window.location.search);
+  console.log();
+}
+
+window?.navigator?.serviceWorker?.getRegistrations?.().then(registrations => {
+  registration = registrations.find(item => item.active?.scriptURL?.includes?.('/firebase-messaging-sw.js'));
+  updateState();
+});
+
+function sleep(milliseconds) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(), milliseconds);
+  });
+}
+
 function updateState() {
   if (element.permissionButton) {
     element.permissionButton.disabled =
       window.Notification === undefined || window.Notification?.permission !== 'default';
   }
   if (element.initializeButton) {
-    element.initializeButton.disabled = !supported || messaging !== null;
+    element.initializeButton.disabled = !supported || messaging !== null || !!initializeApp;
   }
   if (element.registerButton) {
-    element.registerButton.disabled = !!registration;
+    element.registerButton.disabled = !!registration || !navigator.serviceWorker;
   }
   if (element.unregisterButton) {
     element.unregisterButton.disabled = !registration;
@@ -70,7 +77,8 @@ function updateState() {
   }
 
   if (element.tokenButton) {
-    element.tokenButton.disabled = !messaging || !registration || window.Notification?.permission !== 'granted';
+    element.tokenButton.disabled =
+      !messaging || !registration || window.Notification?.permission !== 'granted' || !getToken;
   }
 
   if (element.copyButton) {
@@ -128,32 +136,6 @@ function clearLog() {
   window.dispatchEvent(new StorageEvent('storage', event));
 }
 
-console.log(navigator?.userAgent);
-console.log();
-
-if (window.location.search) {
-  console.log('Query arguments :', window.location.search);
-  console.log();
-}
-
-window?.navigator?.serviceWorker?.getRegistrations?.().then(registrations => {
-  registration = registrations.find(item => item.active?.scriptURL?.includes?.('/firebase-messaging-sw.js'));
-  updateState();
-});
-
-// isSupported().then(value => {
-//   if (!value) {
-//     console.log('Push not supported!');
-//     return;
-//   }
-
-//   supported = true;
-
-//   updateState();
-// });
-
-updateState();
-
 window.onPermissionClick = async () => {
   try {
     console.log('Requesting      : permission');
@@ -164,6 +146,7 @@ window.onPermissionClick = async () => {
   } catch (error) {
     console.log(error);
   }
+
   console.log();
 
   updateState();
@@ -171,7 +154,16 @@ window.onPermissionClick = async () => {
 
 window.onInitializeClick = async () => {
   try {
+    let getMessaging = null;
+    let onMessage = null;
+
     console.log('Requesting      : initialization');
+
+    ({ initializeApp } = await import('https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js'));
+    ({ getMessaging, onMessage, getToken } = await import(
+      'https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging.js'
+    ));
+
     const app = initializeApp(firebaseConfig);
 
     messaging = getMessaging(app);
@@ -181,11 +173,11 @@ window.onInitializeClick = async () => {
     });
 
     console.log('Initialized     :', app.options.projectId);
-
-    console.log();
   } catch (error) {
     console.log(error);
   }
+
+  console.log();
 
   updateState();
 };
@@ -198,15 +190,16 @@ window.onRegisterClick = async () => {
       scope: '/firebase-cloud-messaging-push-scope',
     });
 
-    setTimeout(() => {
-      console.log('Registerd       :', registration?.active?.scriptURL);
-      console.log();
-      updateState();
-    }, 1000);
+    await sleep(1000);
+
+    console.log('Registerd       :', registration?.active?.scriptURL);
   } catch (error) {
     console.log(error);
-    console.log();
   }
+
+  console.log();
+
+  updateState();
 };
 
 window.onTokenClick = async () => {
@@ -222,10 +215,11 @@ window.onTokenClick = async () => {
 
       sendToken(getDeviceName(token), token);
     }
-    console.log();
   } catch (error) {
     console.log(error);
   }
+
+  console.log();
 
   updateState();
 };
@@ -241,6 +235,8 @@ window.onUpdateClick = async () => {
     console.log(error);
   }
   console.log();
+
+  updateState();
 };
 
 window.onUnregisterClick = async () => {
@@ -251,13 +247,14 @@ window.onUnregisterClick = async () => {
 
     registration = null;
 
-    updateState();
-
     console.log('Unregister      : oke');
   } catch (error) {
     console.log(error);
   }
+
   console.log();
+
+  updateState();
 };
 
 window.onCopyClick = () => {

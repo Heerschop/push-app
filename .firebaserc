@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "uva-push-app"
+  },
+  "targets": {
+    "uva-push-app": {
+      "hosting": {
+        "react": [
+          "uva-push-app"
+        ],
+        "native": [
+          "uva-push-app"
+        ]
+      }
+    }
   }
 }
