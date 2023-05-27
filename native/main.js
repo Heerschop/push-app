@@ -52,6 +52,8 @@ window?.navigator?.serviceWorker?.getRegistrations?.().then(registrations => {
   updateState();
 });
 
+if (!supported) console.log('Push not supported!');
+
 function sleep(milliseconds) {
   return new Promise((resolve, reject) => {
     setTimeout(() => resolve(), milliseconds);
