@@ -1,3 +1,14 @@
+### Examples
+* https://taoshu.in/web/push-demo/
+* https://devtails.xyz/@adam/how-to-setup-web-push-notifications-in-ios-safari
+* https://cleverpush.com/en/test-notifications/
+* https://web-push-book.gauntface.com/demos/notification-examples/
+* https://docs.wonderpush.com/docs/web-push-notifications-quickstart
+
+### Errors
+* >>>>>>>>>: https://bugs.webkit.org/show_bug.cgi?id=252544#c18
+* https://invisioncommunity.com/forums/topic/473188-new-push-notifications-don%E2%80%99t-link-to-notificationtopic/
+
 https://firebase.google.com/docs/cloud-messaging/
 https://dev.to/onesignal/how-to-integrate-onesignal-into-a-next-js-app-1dmg
 https://medium.com/@sarafathulla/how-to-add-firebase-push-notifications-in-next-js-react-8eecc56b5cab
@@ -24,8 +35,8 @@ channel.onmessage = event => {
 ```javascript
 self.registration.showNotification('test title', {
   body: 'Test body',
-  icon: '/icon-192.png',
-  badge: '/icon-192.png',
+  icon: '/icon.png',
+  badge: '/icon.png',
 });
 ```
 ```bash
