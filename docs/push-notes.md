@@ -9,16 +9,19 @@
 * >>>>>>>>>: https://bugs.webkit.org/show_bug.cgi?id=252544#c18
 * https://invisioncommunity.com/forums/topic/473188-new-push-notifications-don%E2%80%99t-link-to-notificationtopic/
 
-https://firebase.google.com/docs/cloud-messaging/
-https://dev.to/onesignal/how-to-integrate-onesignal-into-a-next-js-app-1dmg
-https://medium.com/@sarafathulla/how-to-add-firebase-push-notifications-in-next-js-react-8eecc56b5cab
-https://blog.logrocket.com/push-notifications-react-firebase/
-https://developer.apple.com/documentation/usernotifications/sending_web_push_notifications_in_web_apps_safari_and_other_browsers
+* https://firebase.google.com/docs/cloud-messaging/
+* https://dev.to/onesignal/how-to-integrate-onesignal-into-a-next-js-app-1dmg
+* https://medium.com/@sarafathulla/how-to-add-firebase-push-notifications-in-next-js-react-8eecc56b5cab
+* https://blog.logrocket.com/push-notifications-react-firebase/
+* https://developer.apple.com/documentation/usernotifications/sending_web_push_notifications_in_web_apps_safari_and_other_browsers
 
-https://github.com/firebase/firebase-js-sdk/blob/master/packages/app-compat/src/index.ts
-https://github.com/firebase/firebase-js-sdk/blob/master/packages/messaging-compat/src/messaging-compat.ts
-https://github.com/firebase/firebase-js-sdk/blob/master/packages/messaging/src/listeners/sw-listeners.ts
-https://developer.apple.com/forums/tags/wwdc2022-10098
+* https://github.com/firebase/firebase-js-sdk/blob/master/packages/app-compat/src/index.ts
+* https://github.com/firebase/firebase-js-sdk/blob/master/packages/messaging-compat/src/messaging-compat.ts
+* https://github.com/firebase/firebase-js-sdk/blob/master/packages/messaging/src/listeners/sw-listeners.ts
+* https://developer.apple.com/forums/tags/wwdc2022-10098
+
+* https://github.com/firebase/firebase-js-sdk/issues/7309
+* https://github.com/WebKit/WebKit/pull/11848
 
 ```javascript
 channel = new BroadcastChannel('service-channel');
@@ -69,5 +72,19 @@ navigator.serviceWorker.register('/sw.js', { scope: '/' });
 registrations=[];
 navigator.serviceWorker.getRegistrations().then(item=>registrations=item);
 registrations[0].unregister();
+
+```
+```javascript
+  self.registration.showNotification('default title', {
+    body: 'test',
+    icon: '/icon.png',
+    badge: '/badge.png',
+  });
+
+self.registration.showNotification('default title', {
+  body: 'test',
+  icon: '/icon.png',
+  badge: '/badge.png',
+});
 
 ```

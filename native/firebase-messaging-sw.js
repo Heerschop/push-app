@@ -1,4 +1,4 @@
-const version = '2.0.4';
+const version = '2.0.6';
 const channel = new BroadcastChannel('service-worker');
 
 CONSOLE = { log: console.log };
@@ -60,8 +60,8 @@ self.addEventListener('push', event => {
   event.waitUntil(
     self.registration.showNotification(data?.data?.title ?? 'default title', {
       body: version,
-      icon: '/icon-192.png',
-      badge: '/icon-192.png',
+      icon: '/icon.png',
+      badge: '/badge.png',
       data: data?.data.link,
     }),
   );

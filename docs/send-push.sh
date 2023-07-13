@@ -48,7 +48,7 @@ function send-push-web {
 #send-push-web    'iphone-oke' 'frEZqxS-2vU8iPcen5qsm_:APA91bFQ84xCxph9MD2DRfWyWsyqxcdKYlHgS1vgETNHtKiSX_bi6Tprh6Ujp8AzZXcwpTLSHZrobk4HGWR7Xtef1bwIHTfveIPNWaO1iM4Zx8CIyQRlo6qaKBIngmpDsk8kGzf6-Jqn'
 
 #send-push-web    'iphone-err' 'eNMuUyXlT9P-7Fx_SH2ez1:APA91bHO-e1qZJaX5TR8lbpbk46otmCm-I6SF-M5iyBoLhnrFHAQajTNB7n5-EB5ZdmzmkM6dYU_j0q3UCQqnp6GWbq_gM7-3ofIITCcaXBcDr2FisPaJbz7zxeKcvu_gGfaeJZRwxmH'
-send-push-web    'android' 'dR-r80Qnls0puy370UTU48:APA91bG6eknFj04q0FRWvpLYCKUqOshFv0K9IDPsUkOcK-cUefyqAy2leMrSxN_cxuaDB4I-w1NKZ8PJonJSwges9gwCvZvDL1uX1udrwjLrmhSHhUCntotHoclEdlph-Fxwor0t8nGT'
+send-push-web    'iphone' 'dKlQ2ytcLlAi48bidV3Z7V:APA91bELqAaoqPkiX_mze7cieSRoy-S_CVDKACfcTUjFBvh2GZ8pI66t1ejAyhqMQI98DUQjz2RmvodSu4RxAEOyNvmAqdSDMUZKkqi28kQ6Fr-8J_ViYfRatGr15OKqcQRBEMWOwSTc'
 
 
 #send-push-web    'macintosh' 'cajkhS0fK7sUQqw6EvnutX:APA91bHOSw7wDlI_6RfKphS30dYnh2LgBr2Joz8zw5dL54IcNysaebNyyFHX40tKd79mXtvUUXyxyZrSGcteeV0whM8g6FxzhEBfSPOFKK8HFSFPOTUgjcZg1EuDIYD9Nf4q0QcbBBNr'
