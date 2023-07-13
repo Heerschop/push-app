@@ -20,3 +20,6 @@ npx firebase deploy --only hosting:native
 ```bash
 (cd native && npx lite-server)
 ```
+
+
+https://uva-push-app.web.app/
