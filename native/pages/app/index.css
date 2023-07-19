@@ -1,0 +1,38 @@
+body {
+  border: var(--S3) solid #b71c1c;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  position: fixed;
+  top: var(--S5);
+  left: var(--S5);
+  right: var(--S5);
+  background: var(--prim-dark);
+  height: 5rem;
+  font-size: var(--S7);
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  position: fixed;
+  bottom: var(--S5);
+  left: var(--S5);
+  right: var(--S5);
+  background: var(--prim-dark);
+  height: 5rem;
+  font-size: var(--S7);
+  align-items: center;
+  justify-content: center;
+}

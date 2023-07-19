@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+.container div {
+  margin: 1rem 1rem 1rem 1rem;
+  min-width: 10rem;
+  min-height: 10rem;
+}
+
+.r {
+  background: #B71C1C;
+}
+.g {
+  background: #43A047;
+}
+.b {
+  background: #0D47A1;
+}
+.o {
+  background: #FF6F00;
+}
+
+
+
+.i5 {
+  z-index: +5;
+}
+.i-5 {
+  z-index: -5;
+}
+
+.i10 {
+  z-index: +10;
+}
+.i-10 {
+  z-index: -10;
+}
+.i1000 {
+  z-index: +1000;
+}
+.i-1000 {
+  z-index: -1000;
+}
