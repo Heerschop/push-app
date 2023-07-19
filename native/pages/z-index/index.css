@@ -13,19 +13,17 @@
 }
 
 .r {
-  background: #B71C1C;
+  background: #b71c1c;
 }
 .g {
-  background: #43A047;
+  background: #43a047;
 }
 .b {
-  background: #0D47A1;
+  background: #0d47a1;
 }
 .o {
-  background: #FF6F00;
+  background: #ff6f00;
 }
-
-
 
 .i5 {
   z-index: +5;
@@ -44,5 +42,16 @@
   z-index: +1000;
 }
 .i-1000 {
+  z-index: -1000;
+}
+
+.top {
+  position: fixed;
+  margin: 0 !important;
+  background-color: #000000aa;
+  top: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
   z-index: -1000;
 }
