@@ -1,5 +1,5 @@
 :root {
-  --version: '3.0.12';
+  --version: '3.0.25';
 }
 
 body {
@@ -10,7 +10,11 @@ body {
   background: var(--prim-main);
 }
 
-* {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
