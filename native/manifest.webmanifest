@@ -9,8 +9,8 @@
   "orientation": "portrait",
   "id": "push-app",
   "description": "App for testing push notifications",
-  "display": "fullscreen",
-  "display_override": ["fullscreen", "standalone", "side-panel", "window-controls-overlay", "browser"],
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "side-panel", "window-controls-overlay", "browser"],
 
   "icons": [
     { "src": "icons/icon-16x16.png", "sizes": "16x16", "type": "image/png" },
