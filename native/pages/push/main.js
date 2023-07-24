@@ -188,8 +188,8 @@ window.onRegisterClick = async () => {
   try {
     console.log('Requesting      : registration');
 
-    registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
-      scope: '/firebase-cloud-messaging-push-scope',
+    registration = await navigator.serviceWorker.register('/pages/push/firebase-messaging-sw.js', {
+      scope: '/pages/push/firebase-cloud-messaging-push-scope',
     });
 
     await sleep(1000);
