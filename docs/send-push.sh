@@ -27,7 +27,7 @@ function send-push-web {
     "data": {
       "title": "New grade",
       "body": "A new grade has been registered in SIS.",
-      "link":"https://uva-push-app.web.app?gradeId=178091-99999GG3Y"
+      "link":"https://uva-push-app.web.app/pages/push/index.html?gradeId=178091-99999GG3Y"
     },
     "priority": 10
   }
@@ -47,8 +47,8 @@ function send-push-web {
 #send-push-web    'linux' 'cQmfRPL94ChnD0wUxbhRh3:APA91bHbdvmV0i5kYrMXIuCgqa7ab-KR6mFsQAI2GabuY0MVSbCc7Ew9q3nqXol0FyyjXAFIrKgaR4QnUH2gPthy_gdYyu8xtsvhW0SGV9ZYtW_fbf7pXkXWLLTtDANFiIIjmcqA06Kg'
 #send-push-web    'iphone-oke' 'frEZqxS-2vU8iPcen5qsm_:APA91bFQ84xCxph9MD2DRfWyWsyqxcdKYlHgS1vgETNHtKiSX_bi6Tprh6Ujp8AzZXcwpTLSHZrobk4HGWR7Xtef1bwIHTfveIPNWaO1iM4Zx8CIyQRlo6qaKBIngmpDsk8kGzf6-Jqn'
 
-#send-push-web    'iphone-err' 'eNMuUyXlT9P-7Fx_SH2ez1:APA91bHO-e1qZJaX5TR8lbpbk46otmCm-I6SF-M5iyBoLhnrFHAQajTNB7n5-EB5ZdmzmkM6dYU_j0q3UCQqnp6GWbq_gM7-3ofIITCcaXBcDr2FisPaJbz7zxeKcvu_gGfaeJZRwxmH'
-send-push-web    'iphone' 'dKlQ2ytcLlAi48bidV3Z7V:APA91bELqAaoqPkiX_mze7cieSRoy-S_CVDKACfcTUjFBvh2GZ8pI66t1ejAyhqMQI98DUQjz2RmvodSu4RxAEOyNvmAqdSDMUZKkqi28kQ6Fr-8J_ViYfRatGr15OKqcQRBEMWOwSTc'
+send-push-web    'test' 'fMhelqeoPtYLUr1uKGUMbA:APA91bGAR8r6xediedxfhaGYvkPEf0wVi3lR60JpFC8UT8CMhgV_l10EeqTHkJ0CfZSP03iF-e_LPCZXQT-mEpvCl6H0WUVu9rhWbU1BYiTd3QgQxKK1ZHF6kwluJY8iVV9YcntpUtqE'
+#send-push-web    'iphone' 'frJ-TwcvHn6x4lLR70aesZ:APA91bE-7WRcsMQRrN9e4k7-6-Nd-qftzF1qV7oPo1ZPBAjairXWpd2tQhHiUKWdZ4kwJHzRtNFQvlwU55qobwVt9DLNmbvKneR1KBeDqErNG1UD6KL1MNu2-r_6VyXvdYlUNXqnLZBR'
 
 
 #send-push-web    'macintosh' 'cajkhS0fK7sUQqw6EvnutX:APA91bHOSw7wDlI_6RfKphS30dYnh2LgBr2Joz8zw5dL54IcNysaebNyyFHX40tKd79mXtvUUXyxyZrSGcteeV0whM8g6FxzhEBfSPOFKK8HFSFPOTUgjcZg1EuDIYD9Nf4q0QcbBBNr'
